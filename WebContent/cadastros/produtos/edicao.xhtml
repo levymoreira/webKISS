@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>Edição/Inserção de Produtos</title>
+	
+	<style type="text/css">
+		form { font-size: 12px !important; }
+	</style>	
+</h:head>
+<h:body>
+	<h:form id="editForm">
+		<f:view>
+			<h:inputHidden value="#{produtoBean.produtoSelecionado.id}"/>
+			
+			<h3>Produto - #{produtoBean.produtoSelecionado.id==null?"Novo":produtoBean.produtoSelecionado.id}</h3>
+			<br />
+      		<h:outputText value="Nome" />
+      		<br />
+			<p:inputText value="#{produtoBean.produtoSelecionado.nome}" />
+			<br />      		
+      		<h:outputText value="Preço" />  	
+      		<br />
+			<p:inputText value="#{produtoBean.produtoSelecionado.preco}" >
+				<f:convertNumber pattern="#0.00" />
+			</p:inputText>
+			<br />      		
+      		<h:outputText value="Situação" />  	
+      		<br />      		
+        	<p:selectOneRadio value="#{produtoBean.produtoSelecionado.situacao}">  
+           		<f:selectItem itemLabel="Novo" itemValue="0" />           		
+            	<f:selectItem itemLabel="Bom" itemValue="1" />              	
+            	<f:selectItem itemLabel="Mais ou menos" itemValue="2" />  
+            	<f:selectItem itemLabel="Quebrado" itemValue="2" />  
+        	</p:selectOneRadio>  			
+			<br />			
+			<p:selectBooleanCheckbox value="#{produtoBean.produtoSelecionado.inativo}" />
+        	<h:outputText value="Inativo" />  	
+			<br />	
+			<h:outputText value="Observações" />  	
+      		<br />
+			<p:inputText value="#{produtoBean.produtoSelecionado.observacoes}" />
+			<br />						
+			<h:outputText value="Data do Cadastro" />  	
+      		<br />
+			<p:inputText readonly="true" value="#{produtoBean.produtoSelecionado.dataDoCadastro}" />
+			<br />					   		 
+        			
+			<p:commandButton value="Salvar" 
+							 action="#{produtoBean.salvar()}" />
+			<p:spacer width="10" />
+			<p:commandButton value="Cancelar" 
+							 immediate="true"
+							 action="#{produtoBean.cancelar()}" />
+		</f:view>
+	</h:form>
+</h:body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>Listagem de Produtos</title>
+	
+	<style type="text/css">
+		form { font-size: 12px !important; }
+	</style>	
+</h:head>
+<h:body>
+	<h:form>
+		<f:view>		
+			<h3>Listagem de Produtos</h3>
+			<br />
+			<p:commandButton value="Inserir" 
+							 action="#{produtoBean.inserir()}" />		
+			<br />
+			<p:dataTable var="registro" 
+						 value="#{produtoBean.lista}"
+						 style="width: 700px">
+				<p:column headerText="Id" style="width: 100px">
+					<h:outputText value="#{registro.id}" />
+				</p:column>
+				<p:column headerText="Nome" style="width: 200px">
+					<h:outputText value="#{registro.nome}" />
+				</p:column>
+				<p:column headerText="Preço" style="width: 150px">
+					<h:outputText value="#{registro.preco}" >
+						<f:convertNumber pattern="#0.00" />
+					</h:outputText>
+				</p:column>
+				<p:column headerText="Data do cadastro" style="width: 100px">
+					<h:outputText value="#{registro.dataDoCadastro}" />
+				</p:column>
+				<p:column headerText="Ações" style="width: 50px">
+					<p:commandLink value="Editar" 
+								   action="#{produtoBean.editar()}">
+						<f:setPropertyActionListener value="#{registro}"
+													 target="#{produtoBean.produtoSelecionado}" />
+					</p:commandLink>
+					<p:spacer width="10" />
+					<p:commandLink value="Deletar" 								   
+								   action="#{productBean.deletar()}">
+						<f:setPropertyActionListener value="#{registro}"
+												     target="#{produtoBean.produtoSelecionado}" />
+					</p:commandLink>
+				</p:column>
+			</p:dataTable>
+			<br/>
+			<p:commandLink value="Voltar para o index" action="/index?faces-redirect=true"/>
+		</f:view>
+	</h:form>
+</h:body>
+</html>
