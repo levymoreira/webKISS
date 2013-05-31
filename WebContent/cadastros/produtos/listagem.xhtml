@@ -15,9 +15,32 @@
 	</style>	
 </h:head>
 <h:body>
-	<h:form>
+	<h:form id="formListagem">
 		<f:view>		
 			<h3>Listagem de Produtos</h3>
+			<br />
+			
+			<p:panelGrid columns="2">  
+    			<f:facet name="header">  
+        			Pesquisa  
+    			</f:facet>  
+    			
+    			<h:outputLabel value="Valor" />
+    			
+    			<h:outputLabel value="Campo" />
+  
+				<p:inputText value="#{produtoBean.valorFiltro}"/>					
+	
+				<p:selectOneMenu value="#{produtoBean.campoFiltro}">
+					<f:selectItem itemLabel="Nome" itemValue="nome" />
+					<f:selectItem itemLabel="Id" itemValue="id" />
+				</p:selectOneMenu>
+				    
+    			<f:facet name="footer">  
+        			<p:commandButton value="Filtrar" actionListener="#{produtoBean.filtrar}" update="formListagem"/>  
+    			</f:facet>  
+			</p:panelGrid>  
+  					
 			<br />
 			<p:commandButton value="Inserir" 
 							 action="#{produtoBean.inserir()}" />		
@@ -47,7 +70,7 @@
 					</p:commandLink>
 					<p:spacer width="10" />
 					<p:commandLink value="Deletar" 								   
-								   action="#{productBean.deletar()}">
+								   action="#{produtoBean.deletar()}">
 						<f:setPropertyActionListener value="#{registro}"
 												     target="#{produtoBean.produtoSelecionado}" />
 					</p:commandLink>

@@ -19,6 +19,10 @@ public class ProdutoBean {
 	private ProdutoDAO produtoDAO = new ProdutoDAO();
 	
 	private List<Produto> lista = null;
+	
+	private String campoFiltro = "DESCRICAO";
+	
+	private String valorFiltro = "";
 
 	// Constantes
 
@@ -33,6 +37,9 @@ public class ProdutoBean {
 	// Métodos
 	
 	public String salvar() {	
+		if(produtoSelecionado.getId() == 0){
+			produtoSelecionado.setId(null);
+		}
 		produtoDAO.saveOrUpdate(produtoSelecionado);
 		return PAGINA_LISTAGEM;
 	}
@@ -49,6 +56,20 @@ public class ProdutoBean {
 	public String cancelar() {
 		return PAGINA_LISTAGEM;
 	}	
+	
+	public String deletar(){
+		produtoDAO.delete(produtoSelecionado);
+		return PAGINA_LISTAGEM;
+	}
+	
+	public String filtrar(){
+		if(valorFiltro.trim().equalsIgnoreCase("")){ //pesquisa em branco, retorna todos registros
+			lista = produtoDAO.getAll();
+		}else{ 
+			lista = produtoDAO.pesquisar(campoFiltro, valorFiltro);			
+		}
+		return PAGINA_LISTAGEM;
+	}
 
 	// Getters e Setters
 
@@ -69,6 +90,22 @@ public class ProdutoBean {
 
 	public void setProdutoSelecionado(Produto produtoSelecionado) {
 		this.produtoSelecionado = produtoSelecionado;
+	}
+
+	public String getCampoFiltro() {
+		return campoFiltro;
+	}
+
+	public void setCampoFiltro(String campoFiltro) {
+		this.campoFiltro = campoFiltro;
+	}
+
+	public String getValorFiltro() {
+		return valorFiltro;
+	}
+
+	public void setValorFiltro(String valorFiltro) {
+		this.valorFiltro = valorFiltro;
 	}
 	
 }
