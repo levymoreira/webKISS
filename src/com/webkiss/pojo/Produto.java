@@ -28,6 +28,9 @@ public class Produto implements Serializable{
 	@Column(length = 50)
 	private String nome;
 	
+	@Column(length = 300)
+	private String foto;
+	
 	@Column(precision=25, scale=10)
 	private BigDecimal preco;
 	
@@ -47,8 +50,9 @@ public class Produto implements Serializable{
 	
 	public Produto(){}
 	
-	public Produto(String nome){
+	public Produto(String nome, String foto){
 		this.nome = nome;
+		this.foto = foto;
 	}
 
 	//Getters e Setters	
@@ -109,8 +113,18 @@ public class Produto implements Serializable{
 		this.dataDoCadastro = dataDoCadastro;
 	}
 	
+	
+	
 	//Métodos sobrescritos
 	
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
 	@Override
 	public String toString() {	
 		return "Id: " + this.getId() + " Nome: " + this.getNome();

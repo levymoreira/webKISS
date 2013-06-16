@@ -4,18 +4,41 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<title>Index Page</title>
+	<title>Index Page new</title>
 
 	<style type="text/css">
-		form { font-size: 12px !important; }
-	</style>		
+form {
+	font-size: 12px !important;
+}
+</style>
 </h:head>
 
 <h:body>
-	<h:form>
-      	<h3>Index</h3>
-      	<br/>
-        <p:commandButton value="Produtos" action="/cadastros/produtos/listagem?faces-redirect=true" />        
+	<h:form id="iddoform" prependId="false" enctype="multipart/form-data">
+		<p:panel header="Upload">
+			<p:fileUpload fileUploadListener="#{indexManagedBean.enviarImagem}"
+				oncomplete="document.getElementById('idbemlegal').click();return false;"
+				auto="true" image="/imagens/imgBuscar.png"
+				customUI="true" update="iddoform" >
+		
+			</p:fileUpload>
+
+			<p:panel id="outputPanelUpload" header="Ultimo upload">
+				<p:graphicImage height="70" width="60"  value="upload//#{indexManagedBean.imagemTemporaria}"
+					cache="false" />
+			</p:panel>
+		</p:panel>
+		
+		<p:panel id="pgaleriaid" header="Galeria de Uploads">
+			<p:galleria value="#{indexManagedBean.images}" var="image" panelWidth="500"
+						panelHeight="313" showCaption="true">
+				<p:graphicImage value="upload/#{image}"
+								alt="Image Description for #{image}" title="#{image}" />
+			</p:galleria>
+			<br/>
+			<p:commandLink id="idbemlegal" value="Atualizar galeria" action="index" ajax="false" />
+		</p:panel>
+		 
 	</h:form>
 </h:body>
 </html>
