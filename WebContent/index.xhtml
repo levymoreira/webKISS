@@ -15,30 +15,23 @@ form {
 
 <h:body>
 	<h:form id="iddoform" prependId="false" enctype="multipart/form-data">
-		<p:panel header="Upload">
-			<p:fileUpload fileUploadListener="#{indexManagedBean.enviarImagem}"
-				oncomplete="document.getElementById('idbemlegal').click();return false;"
-				auto="true" image="/imagens/imgBuscar.png"
-				customUI="true" update="iddoform" >
-		
-			</p:fileUpload>
 
-			<p:panel id="outputPanelUpload" header="Ultimo upload">
-				<p:graphicImage height="70" width="60"  value="upload//#{indexManagedBean.imagemTemporaria}"
-					cache="false" />
-			</p:panel>
-		</p:panel>
-		
+		<p:fileUpload label="Upload"
+			fileUploadListener="#{indexManagedBean.enviarImagem}" auto="true"
+			image="/imagens/imgBuscar.png" customUI="true"
+			oncomplete="document.getElementById('commandLinkCarrecar').click();return false;" />
+
+
 		<p:panel id="pgaleriaid" header="Galeria de Uploads">
-			<p:galleria value="#{indexManagedBean.images}" var="image" panelWidth="500"
-						panelHeight="313" showCaption="true">
-				<p:graphicImage value="upload/#{image}"
-								alt="Image Description for #{image}" title="#{image}" />
+			<p:galleria id="merchant-gallery" value="#{indexManagedBean.images}"
+				var="item" autoPlay="false">
+				<p:graphicImage width="300" value="#{indexManagedBean.image}">
+					<f:param name="id" value="#{item}" />
+				</p:graphicImage>
 			</p:galleria>
-			<br/>
-			<p:commandLink id="idbemlegal" value="Atualizar galeria" action="index" ajax="false" />
+			<br />
+			<p:commandLink id="commandLinkCarrecar" value="Atualizar Galeria" ajax="false" action="index" />
 		</p:panel>
-		 
 	</h:form>
 </h:body>
 </html>
